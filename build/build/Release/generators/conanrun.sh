@@ -1,0 +1,1 @@
+. "/home/alissoneves/cpp-template/build/build/Release/generators/conanrunenv-release-x86_64.sh"

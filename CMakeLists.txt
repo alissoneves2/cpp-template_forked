@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.28)
 
-# Nome do projeto será herdado do diretório/repo
-project(
-    PROJECT_TEMPLATE
-    VERSION 1.0
-    LANGUAGES CXX
-)
+# Definir nome do projeto dinamicamente
+if(NOT DEFINED PROJECT_NAME)
+    set(PROJECT_NAME cpp-template)
+endif()
+
+project(${PROJECT_NAME} VERSION 1.0 LANGUAGES CXX)
 
 # -----------------------------
 # Configurações do compilador
@@ -26,27 +26,19 @@ find_package(GTest REQUIRED)
 add_executable(${PROJECT_NAME}
     src/main.cpp
 )
-
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE
-        fmt::fmt
+    PRIVATE fmt::fmt
 )
 
-# =============================
-# TESTES (sempre no final)
-# =============================
-
+# -----------------------------
+# Testes
+# -----------------------------
 enable_testing()
-
 add_executable(${PROJECT_NAME}_tests
     tests/test_main.cpp
 )
-
 target_link_libraries(${PROJECT_NAME}_tests
-    PRIVATE
-        GTest::gtest_main
-        fmt::fmt
+    PRIVATE GTest::gtest_main
 )
-
 include(GoogleTest)
 gtest_discover_tests(${PROJECT_NAME}_tests)

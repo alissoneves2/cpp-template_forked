@@ -1,0 +1,5 @@
+/home/alissoneves/cpp-template/build/build/Release/CMakeFiles/cpp-template.dir
+/home/alissoneves/cpp-template/build/build/Release/CMakeFiles/cpp-template_tests.dir
+/home/alissoneves/cpp-template/build/build/Release/CMakeFiles/test.dir
+/home/alissoneves/cpp-template/build/build/Release/CMakeFiles/edit_cache.dir
+/home/alissoneves/cpp-template/build/build/Release/CMakeFiles/rebuild_cache.dir

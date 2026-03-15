@@ -1,0 +1,1 @@
+/usr/bin/c++ -m64 -O3 -DNDEBUG -m64 "CMakeFiles/cpp-template.dir/src/main.cpp.o" -o cpp-template   -L/home/alissoneves/.conan2/p/fmt82b9b4ee8f98e/p/lib  -Wl,-rpath,/home/alissoneves/.conan2/p/fmt82b9b4ee8f98e/p/lib /home/alissoneves/.conan2/p/fmt82b9b4ee8f98e/p/lib/libfmt.a -lm 

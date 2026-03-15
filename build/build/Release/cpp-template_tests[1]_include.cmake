@@ -1,0 +1,5 @@
+if(EXISTS "/home/alissoneves/cpp-template/build/build/Release/cpp-template_tests[1]_tests.cmake")
+  include("/home/alissoneves/cpp-template/build/build/Release/cpp-template_tests[1]_tests.cmake")
+else()
+  add_test(cpp-template_tests_NOT_BUILT cpp-template_tests_NOT_BUILT)
+endif()
