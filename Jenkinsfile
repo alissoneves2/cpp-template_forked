@@ -115,4 +115,6 @@ pipeline {
             echo "Verifique logs, Docker login, Nexus e Kubernetes."
         }
     }
+} 
+
 }
