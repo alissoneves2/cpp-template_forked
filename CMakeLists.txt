@@ -1,44 +1,33 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.10)
+project(cpp-prog1 LANGUAGES CXX)
 
-# Definir nome do projeto dinamicamente
-if(NOT DEFINED PROJECT_NAME)
-    set(PROJECT_NAME cpp-template)
-endif()
-
-project(${PROJECT_NAME} VERSION 1.0 LANGUAGES CXX)
-
-# -----------------------------
-# Configurações do compilador
-# -----------------------------
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-# -----------------------------
-# Dependências (Conan)
-# -----------------------------
+# Busca as dependências
 find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+
+# Cria o executável principal
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+# Linka as bibliotecas
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
+
+# --- CONFIGURAÇÃO DE TESTES ---
 find_package(GTest REQUIRED)
 
-# -----------------------------
-# Executável principal
-# -----------------------------
-add_executable(${PROJECT_NAME}
-    src/main.cpp
-)
-target_link_libraries(${PROJECT_NAME}
-    PRIVATE fmt::fmt
+enable_testing()
+
+add_executable(${PROJECT_NAME}_tests tests/test_main.cpp)
+
+# Linkamos as libs do projeto + GTest e GTest_Main (que fornece o main())
+target_link_libraries(${PROJECT_NAME}_tests 
+    PRIVATE 
+    fmt::fmt 
+    spdlog::spdlog 
+    GTest::gtest 
+    GTest::gtest_main
 )
 
-# -----------------------------
-# Testes
-# -----------------------------
-enable_testing()
-add_executable(${PROJECT_NAME}_tests
-    tests/test_main.cpp
-)
-target_link_libraries(${PROJECT_NAME}_tests
-    PRIVATE GTest::gtest_main
-)
-include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}_tests)
+add_test(NAME MathTest.BasicAssertion COMMAND ${PROJECT_NAME}_tests)
