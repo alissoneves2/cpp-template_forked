@@ -1,4 +1,4 @@
-# 🚀 Template de um C++ CI/CD Pipeline Dinâmico
+# 🚀 Template de um CI/CD Pipeline Dinâmico para projetos em C++ 
 
 Este repositório é um **template de referência** para automação completa de projetos C++. Ele foi projetado para ser 100% dinâmico: ao clonar este template para um novo repositório, o pipeline detecta automaticamente o nome da pasta e configura o Build, a Imagem Docker e o Deploy no Kubernetes sem necessidade de alterações manuais nos scripts.
 
