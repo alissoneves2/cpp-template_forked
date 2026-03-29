@@ -14,7 +14,7 @@ find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 
 # Cria o executável principal
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${APP_NAME} src/main.cpp)
 
 # Linka as bibliotecas
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
@@ -24,10 +24,9 @@ find_package(GTest REQUIRED)
 
 enable_testing()
 
-add_executable(${PROJECT_NAME}_tests tests/test_main.cpp)
+add_executable(${APP_NAME}_tests tests/test_main.cpp)
 
-# Linkamos as libs do projeto + GTest e GTest_Main (que fornece o main())
-target_link_libraries(${PROJECT_NAME}_tests 
+target_link_libraries(${APP_NAME}_tests 
     PRIVATE 
     fmt::fmt 
     spdlog::spdlog 
@@ -35,4 +34,4 @@ target_link_libraries(${PROJECT_NAME}_tests
     GTest::gtest_main
 )
 
-add_test(NAME MathTest.BasicAssertion COMMAND ${PROJECT_NAME}_tests)
+add_test(NAME MathTest.BasicAssertion COMMAND ${APP_NAME}_tests)
