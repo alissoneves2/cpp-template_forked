@@ -7,12 +7,13 @@ pipeline {
     }
 
     environment {
-        PATH = "/home/alissoneves/.local/bin:/usr/local/bin:/usr/bin:/bin:${env.PATH}"
-        REAL_PROJECT_NAME = ""
-        BUILD_DIR = "build/Release"
-        NEXUS_CRED = credentials('nexus-credentials')
-        IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT?.take(7)}"
-    }
+    PATH = "/home/alissoneves/.local/bin:/usr/local/bin:/usr/bin:/bin:${env.PATH}"
+    APP_NAME = "cpp-app"
+    REAL_PROJECT_NAME = "${APP_NAME}"
+    BUILD_DIR = "build/Release"
+    NEXUS_CRED = credentials('nexus-credentials')
+    IMAGE_TAG = "${env.BUILD_NUMBER}-${env.GIT_COMMIT?.take(7)}"
+}
 
     stages {
         stage('Checkout') {
@@ -39,33 +40,6 @@ pipeline {
                 sh "cd ${env.BUILD_DIR} && ctest --output-on-failure"
             }
         }
-
-       stage('Detect Binary Name') {
-    steps {
-        script {
-            def binary = sh(
-                script: """
-                    for f in ${env.BUILD_DIR}/*; do
-                        if [ -f "$f" ] && [[ "$f" != *"_tests" ]]; then
-                            basename "$f"
-                            break
-                        fi
-                    done
-                """,
-                returnStdout: true
-            ).trim()
-
-            if (!binary) {
-                sh "ls -la ${env.BUILD_DIR}"
-                error "❌ Nenhum binário encontrado em ${env.BUILD_DIR}"
-            }
-
-            env.REAL_PROJECT_NAME = binary
-        }
-
-        echo "Binário detectado: ${env.REAL_PROJECT_NAME}"
-    }
-}
 
         stage('Docker Login') {
             steps {
