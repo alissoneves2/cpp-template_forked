@@ -64,6 +64,41 @@ Unit Tests: Execução do CTest.
 
 Docker Build: Criação da imagem com o nome dinâmico do projeto.
 
+
+
+O que você precisa customizar?
+Para que este template funcione no seu ambiente específico, você deve ajustar os seguintes pontos:
+
+No Jenkinsfile (Variáveis de Ambiente)
+Localize o bloco environment e altere os valores de acordo com o seu servidor:
+
+PATH: Certifique-se de que o caminho aponta para onde o conan e o cmake estão instalados no seu Agent Jenkins.
+
+REGISTRY: Altere host.docker.internal:5001 para o endereço do seu Nexus, Docker Hub ou Harbor.
+
+agent { label 'seu-node' }: Altere 'cpp-agent' para a etiqueta (label) que você configurou no seu nó do Jenkins.
+
+No deployment.yaml (Recursos de Rede)
+containerPort: Se o seu projeto C++ rodar em uma porta diferente da 8080, ajuste este valor.
+
+Service (Opcional): Se você quiser acessar o app de fora do cluster, lembre-se de adicionar um manifesto de Service do tipo NodePort ou LoadBalancer apontando para o seu Deployment.
+
+No conanfile.txt (Bibliotecas)
+Se o seu projeto precisar de outras bibliotecas (como OpenSSL, Boost ou nlohmann_json), basta adicioná-las na seção [requires]. O CMake e o Docker já estão preparados para incluí-las automaticamente no próximo build.
+
+No CMakeLists.txt (Padrão C++)
+Se você precisar de funcionalidades do C++20 ou C++23, altere a linha set(CMAKE_CXX_STANDARD 17) para a versão desejada.
+
+📂 Estrutura Visual de Dependências do Projeto
+Para facilitar o entendimento de como esses arquivos se conversam, veja o mapa de dependências:
+
+🚨 Solução de Problemas Comuns (Troubleshooting)
+Erro conan: not found: Verifique se o binário do Conan está no PATH definido no Jenkinsfile. No Linux, geralmente fica em ~/.local/bin.
+
+Erro 403 Forbidden no Git: Isso ocorre se o seu Jenkins tentar atualizar o status do commit no GitHub sem um Token com permissão de escrita. Você pode ignorar esse erro ou fornecer um Personal Access Token (PAT) com permissões de repo:status.
+
+Erro Invalid RFC 1123 subdomain no K8s: Certifique-se de que o nome da sua pasta no GitHub não contém caracteres especiais além de hífens e números. Nosso script já trata underscores, mas evite pontos ou espaços.
+
 Push: Envio para o Registry local.
 
 K8s Deploy: Deploy/Atualização no cluster.
