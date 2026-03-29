@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(cpp-template LANGUAGES CXX)
 
-# Permite sobrescrever via linha de comando
+# Nome do app configurável
 if(NOT DEFINED APP_NAME)
     set(APP_NAME cpp-app)
 endif()
@@ -9,17 +9,20 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Busca as dependências
+# Dependências
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 
-# Cria o executável principal
+# Executável principal
 add_executable(${APP_NAME} src/main.cpp)
 
-# Linka as bibliotecas
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
+target_link_libraries(${APP_NAME}
+    PRIVATE
+    fmt::fmt
+    spdlog::spdlog
+)
 
-# --- CONFIGURAÇÃO DE TESTES ---
+# --- TESTES ---
 find_package(GTest REQUIRED)
 
 enable_testing()
