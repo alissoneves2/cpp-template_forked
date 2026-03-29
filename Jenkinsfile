@@ -1,9 +1,3 @@
-Aqui está a versão final e ajustada do seu Jenkinsfile.
-
-A principal mudança é o bloco environment, onde usamos um comando sh para capturar o basename do diretório atual. Isso garante que, se você clonar o repositório numa pasta chamada cpp-exer1 ou meu-novo-projeto, o Jenkins usará esse nome para tudo.
-
-📄 Jenkinsfile (Dinâmico)
-Groovy
 pipeline {
     agent { label 'cpp-agent' }
 
