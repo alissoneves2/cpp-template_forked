@@ -1,0 +1,20 @@
+* @alissoneves
+
+CMakeLists.txt @alissoneves
+cmake/ @alissoneves
+
+src/ @alissoneves
+include/ @alissoneves
+
+tests/ @alissoneves
+
+.github/workflows/ @alissoneves
+
+docs/ @alissoneves
+README.md @alissoneves
+
+scripts/ @alissoneves
+
+LICENSE @alissoneves
+CONTRIBUTING.md @alissoneves
+CODE_OF_CONDUCT.md @alissoneves
