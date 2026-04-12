@@ -107,3 +107,4 @@ Erro Invalid RFC 1123 subdomain no K8s: Certifique-se de que o nome da sua pasta
 Push: Envio para o Registry local.
 
 K8s Deploy: Deploy/Atualização no cluster.
+teste final
